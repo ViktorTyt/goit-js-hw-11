@@ -5,28 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        .gallery {
-            display: flex;
-            flex-direction: row;
-        }
-        .photo-card {
-            display: block;
-            /* display: flex; */
-            flex-basis: calc( 100% / 4 - 30 px )
-        }
-    </style>
 </head>
 <body>
-    <form class="search-form" id="search-form">
-        <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-        <button type="submit">Search</button>
-    </form>
-    <div class="gallery">
-        <!-- Картки зображень -->
+    <div class="container">
+        <form class="search-form" id="search-form">
+            <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+            <button type="submit"><svg class="icon icon-search" width="10" height="16">
+                <use href="./sprite.svg#icon-search"></use>
+            </svg></button>
+        </form>
+
+        <div class="gallery">
+            <!-- Картки зображень -->
+        </div>
+
+        <button type="button" class="load-more">Load more</button>
     </div>
     <script src="index.js"></script>
 </body>
