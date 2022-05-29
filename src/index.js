@@ -1,6 +1,8 @@
 import './css/styles.css';
 import PhotosApiService from './PhotosApiService.js';
 import Notiflix, { Loading } from 'notiflix';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   form: document.querySelector('.search-form'),
@@ -15,22 +17,29 @@ const photosApiService = new PhotosApiService();
 const render = photos => {
   console.log(photos.hits[0].webformatURL);
   const photosArr = photos.hits;
+  Notiflix.Notify.success(`Hooray! We found ${photos.totalHits} images.`);
   const gallery = photosArr
     .map(
       photo => `<div class="photo-card">
+      <a href="${photo.largeImageURL}">
     <img src="${photo.webformatURL}" alt="${photo.tags}" loading="lazy" />
+    </a>
     <div class="info">
       <p class="info-item">
-        <b>Likes</br> ${photo.likes}</b>
+        <b class="info-item__title">Likes</b>
+        <b class="info-item__text">${photo.likes}</b>
       </p>
       <p class="info-item">
-        <b>Views</br> ${photo.views}</b>
+        <b class="info-item__title">Views</b>
+        <b class="info-item__text">${photo.views}</b>
       </p>
       <p class="info-item">
-        <b>Comments</br> ${photo.comments}</b>
+        <b class="info-item__title">Comments</b>
+        <b class="info-item__text">${photo.comments}</b>
       </p>
       <p class="info-item">
-        <b>Downloads</br> ${photo.downloads}</b>
+        <b class="info-item__title">Downloads</b>
+        <b class="info-item__text">${photo.downloads}</b>
       </p>
     </div>
   </div>`,
@@ -64,12 +73,25 @@ const onSubmit = async event => {
   } catch (error) {
     console.log(error);
   }
+
+  let gallery = new SimpleLightbox('.gallery a', {
+    fadeSpeed: 250,
+    overlayOpacity: 0.7,
+    captionsData: 'alt',
+  });
+
+  gallery.on('show.simplelightbox', function (e) {
+    // do something…
+  });
+
+  gallery.refresh();
 };
 
 const OnLoadMore = async () => {
   const loadMore = await photosApiService.fetchPhotos();
 
   render(loadMore);
+
   console.log(loadMore.total);
   const loadedByPage = photosApiService.perPage * photosApiService.page - photosApiService.perPage;
   console.log(loadedByPage);
