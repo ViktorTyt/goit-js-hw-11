@@ -10,8 +10,21 @@ body {
     background-color: rgb(239, 244, 240);
     color: #212121;
     line-height: 1.5;
+    margin: 0;
 }
 
+.header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background-color: blue;
+    height: 50px;
+}
 .container {
     width: 100%;
     margin: 0 auto;
@@ -22,17 +35,15 @@ body {
 
 .search-form__container {
     position: relative;
-    height: 60%;
-    width: 25%;
+    height: 100%;
+    width: 100%;
 }
 
 .search-form {
     display: flex;
     justify-content:center;
-    align-items: center;
-    background-color:blue;
-    height: 50px;
-    margin-bottom: 20px;
+    min-width: 300px;
+    height: 30px
 }
 
 .search-form__input {
@@ -55,6 +66,11 @@ body {
     cursor: pointer;
 }
 
+.search-form__btn:hover,
+.search-form__btn:focus {
+    background-color: darkgray;
+}
+
 .search-form__icon {
     display: inline-block;
     width: 50%;
@@ -65,6 +81,7 @@ body {
 .gallery {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 70px;
     margin-right: -30px;
 }
 
@@ -123,6 +140,11 @@ body {
     background-color: blue;
     color: blanchedalmond;
     cursor: pointer;
+}
+
+.load-more:hover,
+.load-more:focus {
+    background-color: darkblue;
 }
 .load-more.is-hidden{
     display: none;

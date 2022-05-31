@@ -69,12 +69,12 @@ const onSubmit = async event => {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.',
       );
+    } else {
+      Notiflix.Notify.success(`Hooray! We found ${getPhotos.totalHits} images.`);
     }
 
     refs.gallery.innerHTML = '';
     render(getPhotos);
-
-    Notiflix.Notify.success(`Hooray! We found ${getPhotos.totalHits} images.`);
 
     if (getPhotos.totalHits > photosApiService.perPage) {
       refs.loadMore.classList.remove('is-hidden');
@@ -82,6 +82,8 @@ const onSubmit = async event => {
   } catch (error) {
     console.log(error);
   }
+
+  window.scroll({ top: 0 });
 };
 
 const OnLoadMore = async () => {
